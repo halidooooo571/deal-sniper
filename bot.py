@@ -104,7 +104,7 @@ def check_rss(state):
             title = item.findtext("title", "")
             link = item.findtext("link", "")
             guid = item.findtext("guid", link)
-            if guid in state["seen_deals"]
+            if guid in state["seen_deals"]:
                 continue
             if any(kw in title.lower() for kw in state["rss_keywords"]):
                 send_msg(f"⚡ *Hot Deal:* {title}\n[Deal öffnen]({link})")
