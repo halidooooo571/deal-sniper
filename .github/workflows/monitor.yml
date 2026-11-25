@@ -1,26 +1,26 @@
 name: Deal & Price Monitor
- on:
- schedule:
- - cron: '*/30 * * * *'
- workflow_dispatch:
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
 
 jobs:
- run-bot:
- runs-on: ubuntu-latest
- steps:
- - uses: actions/checkout@v4
- - uses: actions/setup-python@v5
- with:
- python-version: '3.11'
- - run: pip install beautifulsoup4
- - name: Run Bot
- env:
- TG_TOKEN: ${{ secrets.TG_TOKEN }}
- TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
- run: python bot.py
- - name: Persist State
- run: |
- git config user.name "DealBot"
- git config user.email "bot@://github.com"
- git add state.json
- git diff --staged --quiet || (git commit -m "Update state" && git push)
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install beautifulsoup4
+      - name: Run Bot
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
+        run: python bot.py
+      - name: Persist State
+        run: |
+          git config user.name "DealBot"
+          git config user.email "bot@://github.com"
+          git add state.json
+          git diff --staged --quiet || (git commit -m "Update state" && git push)
