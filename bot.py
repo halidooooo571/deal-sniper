@@ -7,7 +7,7 @@ STATE_FILE = "state.json"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"}
 
 def tg_api(method, payload=None):
-    url = f"https://telegram.org{TOKEN}/{method}"
+    url = f"https://api.telegram.org/bot{TOKEN}/{method}"
     data = json.dumps(payload).encode() if payload else None
     req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
     with urllib.request.urlopen(req, timeout=15) as r:
