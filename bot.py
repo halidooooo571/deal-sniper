@@ -68,7 +68,7 @@ def extract_price_jsonld(html):
                     price = float(str(offer.get("price", 0)).replace(",", "."))
                     if price > 0:
                         return item.get("name", title)[:60], price
-         except Exception:
+        except Exception:
              continue
     return title, None
 
